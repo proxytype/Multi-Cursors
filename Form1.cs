@@ -35,6 +35,9 @@ namespace MultiCursors
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool GetCursorPos(ref Win32Point pt);
 
+        [DllImport("user32.dll")]
+        static extern short GetAsyncKeyState(int vKey);
+
         public static Point GetMousePosition()
         {
             var w32Mouse = new Win32Point();
@@ -43,10 +46,6 @@ namespace MultiCursors
             return new Point(w32Mouse.X, w32Mouse.Y);
         }
 
-        [DllImport("user32.dll")]
-        static extern short GetAsyncKeyState(Int32 vKey);
-
-        MemoryStream cursor;
         Image cursorImage;
 
         int cursorWidth = 0;
